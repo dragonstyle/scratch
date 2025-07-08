@@ -53845,7 +53845,14 @@ self.onmessage = function (e) {
           return Number(rangeMatch[3]);
         }
       }
-      throw new Error("Could not determine content length");
+      const headResponse = await fetch(`${url}`, {
+        method: "HEAD"
+      });
+      const contentLength = headResponse.headers.get("Content-Length");
+      if (contentLength !== null) {
+        return Number(contentLength);
+      }
+      throw new Error(`Could not determine content length for ${url}`);
     };
     const fetchRange = async (url, start2, end2) => {
       const response = await fetch(`${url}`, {

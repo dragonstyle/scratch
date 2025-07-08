@@ -1,0 +1,127 @@
+{
+  "2025-01-02T14-01-45-05-00_computer-task_6GfbX5WZxRS2VcwCYSL54i.eval": {
+    "version": 2,
+    "status": "success",
+    "eval": {
+      "eval_id": "BTjdr2FonMi4DirPZhG4Zy",
+      "run_id": "CuUGahhFc3eC9C3cxhqkTB",
+      "created": "2025-01-02T14:01:45-05:00",
+      "task": "computer_task",
+      "task_id": "6GfbX5WZxRS2VcwCYSL54i",
+      "task_version": 0,
+      "task_file": "examples/computer/computer.py",
+      "task_attribs": {},
+      "task_args": {},
+      "task_args_passed": {},
+      "dataset": {
+        "samples": 4,
+        "sample_ids": [
+          1
+        ],
+        "shuffled": false
+      },
+      "sandbox": {
+        "type": "docker",
+        "config": "compose.yaml"
+      },
+      "model": "anthropic/claude-3-5-sonnet-latest",
+      "model_generate_config": {},
+      "model_args": {},
+      "config": {
+        "limit": 1,
+        "sandbox_cleanup": false
+      },
+      "revision": {
+        "type": "git",
+        "origin": "git@github.com:epatey/inspect_ai.git",
+        "commit": "3cf25089"
+      },
+      "packages": {
+        "inspect_ai": "0.3.56.dev5+gb7a02b5c"
+      }
+    },
+    "plan": {
+      "name": "plan",
+      "steps": [
+        {
+          "solver": "system_message",
+          "params": {
+            "template": "\nBefore each step, please clearly explain your intent for performing a tool action: \"I expect a tool command X to ...\".\n\nAfter each step, take a screenshot and carefully evaluate if you have achieved the right outcome.\nExplicitly show your thinking: \"I have evaluated step X...\" If not correct, try again. Only when\nyou confirm a step was executed correctly should you move on to the next one.\n\nNote that launching applications from the bottom task bar requires a single left click.\n"
+          }
+        },
+        {
+          "solver": "use_tools",
+          "params": {
+            "tools": [
+              [
+                {
+                  "type": "tool",
+                  "name": "computer",
+                  "params": {}
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "solver": "submit_tool",
+          "params": {}
+        },
+        {
+          "solver": "basic_agent_loop",
+          "params": {}
+        }
+      ],
+      "config": {}
+    },
+    "results": {
+      "total_samples": 1,
+      "completed_samples": 1,
+      "scores": [
+        {
+          "name": "includes",
+          "scorer": "includes",
+          "params": {},
+          "metrics": {
+            "accuracy": {
+              "name": "accuracy",
+              "value": 1.0,
+              "params": {}
+            },
+            "stderr": {
+              "name": "stderr",
+              "value": 0.0,
+              "params": {}
+            }
+          }
+        }
+      ]
+    },
+    "stats": {
+      "started_at": "2025-01-02T14:01:45-05:00",
+      "completed_at": "2025-01-02T14:08:18-05:00",
+      "model_usage": {
+        "anthropic/claude-3-5-sonnet-latest": {
+          "input_tokens": 142,
+          "output_tokens": 1673,
+          "total_tokens": 306541,
+          "input_tokens_cache_write": 25452,
+          "input_tokens_cache_read": 279274
+        }
+      }
+    },
+    "reductions": [
+      {
+        "scorer": "includes",
+        "samples": [
+          {
+            "value": 1.0,
+            "answer": "26",
+            "explanation": "26",
+            "sample_id": 1
+          }
+        ]
+      }
+    ]
+  }
+}

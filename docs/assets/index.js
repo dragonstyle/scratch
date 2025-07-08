@@ -53846,7 +53846,7 @@ self.onmessage = function (e) {
             method: "GET",
             headers: { Range: "bytes=0-0" }
           });
-          if (getResponse.ok && rand < 0.2) {
+          if (getResponse.ok && rand < 0.05) {
             rangeRequestHeaders = getResponse.headers;
             break;
           } else {
